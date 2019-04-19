@@ -1,7 +1,7 @@
 # Smart Tiny Home
 
 
-![](https://github.com/sauloonze/homeassistant-config/blob/master/images/home.png)
+![](https://github.com/sauloonze/HomeAssistantConfiguration/blob/master/images/home.png)
 
 ## Home Assistant Configuration
 
@@ -111,15 +111,15 @@ I am using two raspberry pi 3b+. The first one a.k.a.(home) runs the heavy load 
 
 - Home
   
-![](https://github.com/sauloonze/homeassistant-config/blob/master/images/home.png)
+![](https://github.com/sauloonze/HomeAssistantConfiguration/blob/master/images/home.png)
 
 - Media
   
-![](https://github.com/sauloonze/homeassistant-config/blob/master/images/media.png)
+![](https://github.com/sauloonze/HomeAssistantConfiguration/blob/master/images/media.png)
 
 - Climate
   
-![](https://github.com/sauloonze/homeassistant-config/blob/master/images/climate.png)
+![](https://github.com/sauloonze/HomeAssistantConfiguration/blob/master/images/climate.png)
 
 # TODO
 
