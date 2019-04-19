@@ -1,0 +1,31 @@
+#################################################################
+#                                                               #
+#                           Switches                            #
+#                                                               #
+#################################################################
+
+####################################################
+#                                                  #
+#                    Broadlink                     #
+#                                                  #
+####################################################
+
+- platform: broadlink
+  host: !secret host_broadlink
+  mac: !secret host_broadlink_mac
+  timeout: 30
+  switches:
+    candles:
+      friendly_name: "Candles"
+      command_on: 'JgBQAAABJ5USFREVERUSFBIUEhURFRE5ETkSORI4EjkSOBI5EjgSFREVETkSFREVETkSFBIVERUROREVEjgSORIUEjgSORI4EgAFBwABJ0sSAA0FAAAAAAAAAAA='
+      command_off: 'JgBQAAABJpYTExIUEhQUEhQSEhQSFBI5EjgUNxM3FDcSOBI5EjgUExEVEzcUEhI5ETkSFBIUEhQSORIUEzcSFBQTETkSOBI5EgAFBgABJkwUAA0FAAAAAAAAAAA='    
+
+    ir_samsungtv:
+      friendly_name: "Samsung TV"
+      command_on: 'JgBGAJKUEjgSOBI4EhMSExITEhMSExI4EjgSOBITEhMSExITEhMSExI4EjgSExITEjgSOBI4EjgSExITEjgSOBITEhMSExIADQUAAA=='
+      command_off: 'JgBGAJKUEjgSOBI4EhMSExITEhMSExI4EjgSOBITEhMSExITEhMSExI4EjgSExITEjgSOBI4EjgSExITEjgSOBITEhMSExIADQUAAA=='
+
+    livingroom_aircon:
+      friendly_name: "Living Room Aircon"
+      command_on: 'JgC8AXE4Dg8QKg4PDg4PDw8ODw4PDg4ODw4PDg8ODg8OLA8ODw4PDQ8ODw4PDg8ODysQKg8rDw0PDg8rDw4PDg8ODhAPDQ4PDg4QDQ4PDw4PDg8PDw0PDg8NEA0PDg8ODw8NEA8NDg8ODw4ODg8PDhANDw8ODg8ODysPKg8PDg4PDw8ODw0OAAFRcTkPDg8rDg8NDw8ODw8ODw8NDw4PDg4ODw4PDg8sDg8ODg8ODw4ODg8ODw8OLA4sDysPDQ8ODysPDg4PDw4PDg8ODw4ODg8ODw4PDg4PDw8ODg8rDg4PDg8rDw4PDg8sDg4PDg8rDyoPKw8PDysPDg8ODg4PDg8ODw4ODw8ODg8PKw8qDw4PDg8ODysPKw8PDg4PDg8qDysPDg8ODw8ODw8NDg8ODw4PDg4PDg8PDg8PDQ8ODysPKg8sDg8PDg4PDw4ODg4PDw4ODw8ODysQKg8rDw4ODg8ODw4PDg8ODhAODg4PDg4PDg4PDw4PDg8ODw4PKw8NDw4PDg8ODw4PDw8qDw4PDg4ODw4PDw0PDw8PDQ8ODw4ODg8ODg8PDw4PDw0PKw8rDg8ODg8PDiwPDg8qDgANBQAAAAAAAAAAAAAAAA=='
+      command_off: 'JgDAAQkACJdxOQ8NECoQDQ8ODw4QDQ8ODg8PDQ8ODg8PDg8OECoPDw8NDw0QDRANDw4ODw8rDywPKhANDw4OLA4ODw4PDw4PDw0PDg8ODg4PDg8PDg8ODw8ODg4ODw8ODg8ODg8PDw4PDQ8ODw4ODw4ODw8ODw4PDw4ODg8rDysPDg8ODg8PDg8NDgABUXE4Dw4PKw8NDw8ODw4PDw4PDg4ODw4PDg8ODg8PKw8ODw4ODg8ODw4PDg4PDysPKw8rDg8ODg8rDw4PDg8ODw8ODg8ODw0PDg8ODw4PDg8PDg4PDg8ODQ8PKw8ODg8PLA8NDw4PKw8qDywODw8rDw4ODw8NDw4ODw8ODw4PDg8ODysPKw4ODw4PDg8rDysPDw4ODw4PKw4rDw4PDw4PDw4PDg4ODw4PDg4PDg4PDw4PDg4PDg8rDysPKw8ODw4PDg8ODw0PDg8ODw4PDg8rDysPKw8ODg8ODg8ODw4PDg8PDg4PDg8NDw4PDg8ODw4PDw4ODysPDQ8ODw4PDg4PDw8PKg8ODw4ODg8ODw8ODw4PDw4NDw4PDw4ODw4ODw8PDg8NDw4PKw8ODw4ODw4sEA0PKg4ADQUAAAAACQAIlw=='

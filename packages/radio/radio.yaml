@@ -1,0 +1,159 @@
+homeassistant:
+  customize:
+    script.play_radio:
+      action_name: 'Play'
+      icon: mdi:play
+    script.stop_radio:
+      action_name: 'Stop'
+      icon: mdi:stop
+
+    input_number.radio_volume:
+      templates:
+        icon: >
+          if (state === '0.0') return 'mdi:volume-off';
+          if (state <= '0.3') return 'mdi:volume-low';
+          if (state <= '0.6') return 'mdi:volume-medium';
+          if (state <= '1.0') return 'mdi:volume-high';
+        icon_color: >
+          {{
+          if (state === '0.0') return 'rgb(145,227,237)';
+          if (state <= '0.1') return 'rgb(105,212,231)';
+          if (state <= '0.2') return 'rgb(46,147,238)';
+          if (state <= '0.3') return 'rgb(0,220,16)';
+          if (state <= '0.4') return 'rgb(0,195,13)';
+          if (state <= '0.5') return 'rgb(250,255,0)';
+          if (state <= '0.6') return 'rgb(252,150,0)';
+          if (state <= '0.7') return 'rgb(218,53,0)';
+          if (state <= '0.8') return 'rgb(255,0,0)';
+          if (state <= '0.9') return 'rgb(154,0,0)';
+          if (state <= '1.0') return 'rgb(81,0,0)';
+          }}
+
+##############################################################################################################
+# Inputs
+##############################################################################################################
+
+input_boolean:
+  stop_radio:
+    name: Stop radio
+    initial: off
+    icon: mdi:volume-off
+
+input_select:
+  radio_station:
+    icon: mdi:radio
+    name: 'Select Radio Station:'
+    options:
+      - 'ABC News'
+      - 'Triple J'
+      - '3FM'
+
+  media_player:
+    name: 'Select Media player:'
+    icon: mdi:speaker-wireless
+    options:
+      - LivingRoom
+      - FamilyRoom
+      - Broadcast (all)
+    initial: FamilyRoom
+
+input_number:
+  radio_volume:
+    name: Volume
+    min: 0
+    max: 1
+    step: 0.05
+    unit_of_measurement: '%'
+
+##############################################################################################################
+# Sensor
+##############################################################################################################
+
+sensor:
+  - platform: template
+    sensors:
+      media_player:
+        friendly_name: Media player
+        value_template: >
+          {% set state = states('input_select.media_player') %}
+          {% if (state == 'LivingRoom') %} media_player.living_room
+          {% elif (state == 'FamilyRoom') %} media_player.family_room_speaker
+          {% else %} group.broadcast
+          {% endif %}
+
+  - platform: template
+    sensors:
+      radio_station:
+        friendly_name: Radio station
+        value_template: >
+            {% set mapper = 
+              { 'ABC News':'http://live-radio01.mediahubaustralia.com/PBW//mp3/',
+                'Triple J':'http://live-radio01.mediahubaustralia.com//2TJW//mp3/',
+                '3FM':'http://icecast.omroep.nl/3fm-bb-mp3' } %}
+            {% set state = states('input_select.radio_station') %}
+            {{mapper[state]}}
+
+##############################################################################################################
+# Scripts
+##############################################################################################################
+
+script:
+  stop_radio:
+    alias: Stop radio
+    sequence:
+      service: media_player.turn_off
+      data_template:
+        entity_id: >
+          {{states('sensor.media_player')}}
+
+  play_radio:
+    alias: Play radio
+    sequence:
+      - service: media_player.play_media
+        data_template:
+          entity_id: >
+            {{states('sensor.media_player')}}
+          media_content_id: >
+            {{states('sensor.radio_station')}}
+          media_content_type: 'audio/mp4'
+
+  ##############################################################################################################
+# Automations
+##############################################################################################################
+
+automation:
+  - alias: Play Radio
+    hide_entity: True
+    trigger:
+      platform: state
+      entity_id: input_select.radio_station
+    action:
+      service: script.play_radio
+
+  - alias: Stop radio
+    hide_entity: True
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.family_home
+        to: 'off'
+        for:
+          minutes: 5
+      - platform: state
+        entity_id: input_boolean.stop_radio
+        to: 'on'
+    action: 
+      service: script.stop_radio
+
+  - alias: 'Set Radio volume'
+    id: 'Set Radio volume'
+    trigger:
+      platform: state
+      entity_id: input_number.radio_volume
+    condition: []
+    action:
+      service: media_player.volume_set
+      data_template:
+        entity_id: >
+          {{states('sensor.media_player')}}
+        volume_level: >
+          {{  states('input_number.radio_volume')|float }}

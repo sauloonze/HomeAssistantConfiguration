@@ -1,0 +1,23 @@
+#################################################################
+#                                                               #
+#                      Packages/Cameras                         #
+#                                                               #
+#################################################################
+
+camera:
+
+####################################################
+#                                                  #
+#                 Xiaomi Cameras                   #
+#                                                  #
+####################################################
+ 
+  - platform: ffmpeg
+    input: !secret xiaomi_cam_1
+    name: LivingRoom6
+  - platform: ffmpeg
+    input: !secret xiaomi_cam_2
+    name: FrontGarden134
+  - platform: ffmpeg
+    input: !secret xiaomi_cam_3
+    name: BackGarden92

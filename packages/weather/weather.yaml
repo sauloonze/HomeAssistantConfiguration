@@ -1,0 +1,172 @@
+#################################################################
+#                                                               #
+#                      Packages/Weather                         #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                            Sensors                            #
+#                                                               #
+#################################################################
+
+sensor:
+
+####################################################
+#                                                  #
+#                 Sensor - AirVisual               #
+#                                                  #
+####################################################
+
+  - platform: airvisual
+    api_key: !secret airvisual_api_key
+    monitored_conditions:
+      - us
+    show_on_map: false
+    city: Swan
+    state: Western Australia
+    country: Australia
+  
+####################################################
+#                                                  #
+#                  Sensor - Darksky                #
+#                                                  #
+####################################################
+  
+## Weather Dark Sky
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    forecast:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+    monitored_conditions:
+      - icon
+      - summary
+      - nearest_storm_distance
+      - nearest_storm_bearing
+      - humidity
+      - temperature
+      - temperature_high
+      - temperature_low
+      - apparent_temperature
+      - apparent_temperature_high
+      - apparent_temperature_low
+      - wind_speed
+      - wind_bearing
+      - precip_type
+      - precip_probability
+      - precip_accumulation
+      - precip_intensity
+      - precip_intensity_max
+      - uv_index
+      - daily_summary
+      - pressure
+      - visibility
+    scan_interval:
+      minutes: 30
+
+
+####################################################
+#                                                  #
+#                   Sensor - Mold                  #
+#                                                  #
+####################################################
+
+  - platform: mold_indicator
+    name: Living Room Mold Indicator
+    indoor_temp_sensor: sensor.temperature_158d000170e48e
+    indoor_humidity_sensor: sensor.humidity_158d000170e48e
+    outdoor_temp_sensor: sensor.temperature_158d000170e3ef
+    calibration_factor: 2.0
+
+####################################################
+#                                                  #
+#                 Sensor - Template                #
+#                                                  #
+####################################################
+      
+  - platform: template
+    sensors:
+      bom_temp:
+        friendly_name: "Bickley WA Temperature"
+        value_template: "{{ states.weather.bom_bickleywa.attributes.temperature }}"
+        device_class: temperature
+        unit_of_measurement: °C
+        
+      bom_humd:
+        friendly_name: "Bickley WA Humidity"
+        value_template: "{{ states.weather.bom_bickleywa.attributes.humidity }}"
+        #device_class: humidity
+        unit_of_measurement: '%'
+        
+      bom_wind_sp:
+        friendly_name: "Bickley WA Wind Speed"
+        value_template: "{{ states.weather.bom_bickleywa.attributes.wind_speed }}"
+        #device_class: temperature
+        unit_of_measurement: km
+        
+      bom_wind_bear:
+        friendly_name: "Bickley WA Wind Bearing"
+        value_template: "{{ states.weather.bom_bickleywa.attributes.wind_bearing }}"
+        #device_class: temperature
+        #unit_of_measurement: km
+        
+      bom_pres:
+        friendly_name: "Bickley WA Pressure"
+        value_template: "{{ states.weather.bom_bickleywa.attributes.pressure }}"
+        #device_class: temperature
+        unit_of_measurement: hPa
+        
+      aqi:
+        friendly_name: "Air Quality Index"
+        value_template: "{{ states.sensor.us_air_quality_index.state }}"
+        
+      spray_condition:
+        friendly_name: 'Spray Suitability'
+        value_template: >-
+         {% set suit = states.sensor.delta_t.state %}
+         {% if suit | float<=2 %}Unsuitable
+         {% elif suit | float>2 %}Suitable
+         {% elif suit | float>8 %}Marginal
+         {% elif suit | float>10 %}Unsuitable
+         {%- endif %}
+        icon_template: >-
+         {% if is_state('sensor.spray_condition', 'Unsuitable') %}
+            mdi:hand
+         {% elif is_state('sensor.spray_condition', 'Suitable') %}
+            mdi:spray
+         {% elif is_state('sensor.spray_condition', 'Marginal') %}
+            mdi:sign-caution
+         {% endif %}
+
+
+#################################################################
+#                                                               #
+#                            Weather                            #
+#                                                               #
+#################################################################
+
+weather:
+
+####################################################
+#                                                  #
+#                   Weather - BOM                  #
+#                                                  #
+####################################################
+
+  - platform: bom
+    station: IDW60901.95610
+    name: BickleyWA
+  
+####################################################
+#                                                  #
+#                Weather - Darksky                 #
+#                                                  #
+####################################################
+  
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    mode: daily

@@ -1,0 +1,8 @@
+sensor.date:
+  icon: mdi:calendar
+binary_sensor.door_window_sensor_158d00019dab6f:
+  device_class: door
+binary_sensor.0x00158d0002c6c16c_contact:
+  device_class: door
+device_tracker.core_router:
+  icon: mdi:server-network

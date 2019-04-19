@@ -1,0 +1,395 @@
+#################################################################
+#                                                               #
+#                       Packages/Xiaomi                         #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                          Customize                            #
+#                                                               #
+#################################################################
+
+homeassistant:
+  customize:
+    input_select.aqara_play_ringtone:
+      icon: mdi:play
+    input_select.aqara_stop_ringtone:
+      icon: mdi:stop
+
+#################################################################
+#                                                               #
+#                       Input Selects                           #
+#                                                               #
+#################################################################
+
+input_select:
+
+####################################################
+#                                                  #
+#            Input Select - Play Ringtone          #
+#                                                  #
+####################################################
+
+  aqara_play_ringtone:
+    name: Play Ringtone
+    options:
+      - None
+      - Police Car 1
+      - Police Car 2
+      - Accident
+      - Countdown
+      - Ghost
+      - Sniper Rifle
+      - Battle
+      - Air Raid
+      - Bark
+      - Doorbell
+      - Knock at a Door
+      - Amuse
+      - Alarm Clock
+      - MiMix
+      - Enthusiastic
+      - Guitar Classic
+      - Ice World Piano
+      - Leisure Time
+      - Childhood
+      - Morning Stream Liet
+      - Music Box
+      - Orange
+      - Thinker
+      
+####################################################
+#                                                  #
+#            Input Select - Stop Ringtone          #
+#                                                  #
+####################################################
+
+  aqara_stop_ringtone:
+    name: Stop Ringtone
+    options:
+      - None
+
+#################################################################
+#                                                               #
+#                         Xiaomi Aqara                          #
+#                                                               #
+#################################################################
+
+# Gateways
+xiaomi_aqara:
+  discovery_retry: 10
+  gateways:
+    - mac: !secret host_xiaomi_gw_1_mac 
+      host: !secret host_xiaomi_gw_1
+      key: !secret host_xiaomi_gw_1_key
+    - mac: !secret host_xiaomi_gw_2_mac
+      host: !secret host_xiaomi_gw_2
+      key: !secret host_xiaomi_gw_2_key
+
+
+#################################################################
+#                                                               #
+#                        Automations                            #
+#                                                               #
+#################################################################
+
+automation:
+  - id: 'play_0'
+    alias: Play Police 1 Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Police Car 1
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '0'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_1'
+    alias: Play Police 2 Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Police Car 2
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '1'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_2'
+    alias: Play Accident Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Accident
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '2'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_3'
+    alias: Play Countdown Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Countdown
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '3'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_4'
+    alias: Play Ghost Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Ghost
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '4'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_5'
+    alias: Play Sniper Rifle Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Sniper Rifle
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '5'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_6'
+    alias: Play Battle Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Battle
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '6'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_7'
+    alias: Play Air Raid Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Air Raid
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '7'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_8'
+    alias: Play Bark Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Bark
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '8'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_10'
+    alias: Play Doorbell Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Doorbell
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '10'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_11'
+    alias: Play Knock at a door Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Knock at a Door
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '11'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_12'
+    alias: Play Amuse Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Amuse
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '12'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_13'
+    alias: Play Alarm Clock Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Alarm Clock
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '13'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_20'
+    alias: Play MiMix Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: MiMix
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '20'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_21'
+    alias: Play Enthusiastic Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Enthusiastic
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '21'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_22'
+    alias: Play Guitar Classic Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Guitar Classic
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '22'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_23'
+    alias: Play Ice World Piano Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Ice World Piano
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '23'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_24'
+    alias: Play Leisure Time Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Leisure Time
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '24'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_25'
+    alias: Play Childhood Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Childhood
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '25'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_26'
+    alias: Play Morning Stream Liet Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Morning Stream Liet
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '26'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_27'
+    alias: Play Music Box Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Music Box
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '27'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_28'
+    alias: Play Orange Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Orange
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '28'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone
+      
+  - id: 'play_29'
+    alias: Play Thinker Ringtone
+    trigger:
+    - entity_id: input_select.aqara_play_ringtone
+      platform: state
+      to: Thinker
+    action:
+    - data:
+        gw_mac: '!secret host_xiaomi_gw_1_mac'
+        ringtone_id: '29'
+        ringtone_vol: '30'
+      service: xiaomi_aqara.play_ringtone

@@ -1,0 +1,124 @@
+#################################################################
+#                                                               #
+#                    Packages/Alarm System                      #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                          Customize                            #
+#                                                               #
+#################################################################
+
+homeassistant:
+  customize:
+    alarm_control_panel.ha_alarm:
+      icon: mdi:shield-home
+    sensor.house_alarm_sensor:
+      templates:
+        icon_color: >
+          if (state === 'Armed Away') return 'rgb(222,40,40)';
+          if (state === 'Armed Home') return 'rgb(222,40,40)';
+          if (state === 'Triggered') return 'rgb(222,40,40)';
+          if (state === 'Pending') return 'rgb(252,255,0)';
+          return 'rgb(3,155,229)';
+          
+#################################################################
+#                                                               #
+#                           Group                               #
+#                                                               #
+#################################################################
+
+group:
+  security:
+    name: Security
+    icon: mdi:shield-home
+    view: yes
+    entities:
+      - group.alarms
+      - group.doors
+#      - group.windows
+      - group.motion
+      
+  alarms:
+    name: Alarms
+    icon: mdi:shield-home
+    view: no
+    entities:
+      - alarm_control_panel.ha_alarm
+      # - binary_sensor.smoke_sensor_158d0001b8ddc7
+      # - binary_sensor.smoke_sensor_158d0001b8deba
+          
+  motion:
+    name: Motion
+    icon: mdi:walking
+    view: no
+    entities:
+      - binary_sensor.motion_sensor_158d0001a2b1f2
+      - binary_sensor.0x00158d00028a0398_occupancy
+
+  doors:
+    name: Doors
+    icon: mdi:door-open
+    view: no
+    entities:
+      - binary_sensor.door_window_sensor_158d00019dab6f
+      - binary_sensor.0x00158d0002c6c16c_contact
+
+
+#################################################################
+#                                                               #
+#                     MQTT Control Panel                        #
+#                                                               #
+#################################################################
+
+alarm_control_panel:
+  - platform: manual_mqtt
+    state_topic: home/alarm
+    command_topic: home/alarm/set
+
+#################################################################
+#                                                               #
+#                      Template Sensors                         #
+#                                                               #
+#################################################################
+
+sensor:
+  - platform: template
+    sensors:
+      door_count:
+        value_template: >-
+          {{ states.binary_sensor | selectattr('state', 'eq', 'on') | selectattr('attributes.device_class', 'eq', 'door') | list | count | int }}
+    #   window_count:
+    #     value_template: >-
+    #       {{ states.binary_sensor | selectattr('state', 'eq', 'on') | selectattr('attributes.device_class', 'eq', 'window') | list | count | int }}
+
+
+####################################################
+#                                                  #
+#             Binary Sensor - Template             #
+#                                                  #
+####################################################
+           
+binary_sensor:
+  - platform: template
+    sensors:
+    
+      doors:
+        friendly_name: Doors
+        device_class: door
+        entity_id: group.doors
+        value_template: "{{ is_state('group.doors', 'on') }}"
+        icon_template: >-
+          {% if is_state('group.doors', 'on') %}
+            mdi:door-open
+          {% elif is_state('group.doors', 'off') %}
+            mdi:door-closed
+          {% else %}
+            mdi:alert
+          {% endif %}
+      
+      house_alarm_sensor:
+        friendly_name: "House Alarm"
+        value_template: "{% if is_state('alarm_control_panel.ha_alarm','armed_away') -%} Armed Away {% elif is_state('alarm_control_panel.ha_alarm','armed_home') -%} Armed Home {%- else -%} {{states('alarm_control_panel.ha_alarm')|title}} {%- endif %}"
+        icon_template: "{% if is_state('alarm_control_panel.ha_alarm', 'armed_away') -%} mdi:shield-lock {% elif is_state('alarm_control_panel.ha_alarm', 'armed_home') -%} mdi:shield-home {%- else -%} mdi:shield-outline {%- endif %}"

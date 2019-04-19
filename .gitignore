@@ -1,0 +1,24 @@
+.DS_Store
+._.DS_Store
+.uuid
+.HA_VERSION
+.storage
+.cloud
+*.log
+*.db
+custom_components/__pycache__
+custom_components/sensor/__pycache__
+tts/*
+
+# Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
+secrets.yaml
+known_devices.yaml
+
+
+www/lovelace/home/saulo.jpg
+www/lovelace/home/olga.jpg
+www/lovelace/home/home.png
+
+configurator.py
+www/fontawesome/*
+www/github/*

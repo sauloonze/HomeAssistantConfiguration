@@ -1,0 +1,191 @@
+#################################################################
+#                                                               #
+#                       Packages/Presence                       #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                      Device Trackers                          #
+#                                                               #
+################################################################# 
+
+device_tracker:
+
+####################################################
+#                                                  #
+#              Device Tracker - Ping               #
+#                                                  #
+####################################################
+
+  - platform: ping
+    hosts:
+      saulo_ping: !secret host_saulo
+      olga_ping: !secret host_olga
+
+  - platform: mqtt
+    devices:
+      saulos_pixel2xl_ble: !secret saulos_pixel2xl_ble
+      saulos_amazfit2_ble: !secret saulos_amazfit2_ble
+      saulos_mac_ble: !secret saulos_mac_ble
+      saulos_headset_ble: !secret saulos_headset_ble
+      olgas_pixel2xl_ble: !secret olgas_pixel2xl_ble
+
+#################################################################
+#                                                               #
+#                          Sensors                              #
+#                                                               #
+################################################################# 
+
+sensor:
+
+####################################################
+#                                                  #
+#                Sensors - Template                #
+#                                                  #
+####################################################
+    
+## Create Sensor for Display in UI      
+  - platform: template
+    sensors:
+      saulo:
+        friendly_name: "Saulo"
+        value_template: >-
+          {% if is_state('device_tracker.saulo_bayesian', 'home') %}
+            Home
+          {% else %}
+            Away
+          {% endif %}
+        entity_picture_template: >-
+          {% if is_state('device_tracker.saulo_bayesian', 'home') %}
+            /local/home/saulo.jpg
+          {% endif %}
+        icon_template: >-
+          {% if is_state('device_tracker.saulo_bayesian', 'home') %}
+            mdi:home
+          {% else %}
+            mdi:walk
+          {% endif %}
+          
+      olga:
+        friendly_name: "Olga"
+        value_template: >-
+          {% if is_state('device_tracker.olga_bayesian', 'home') %}
+            Home
+          {% else %}
+            Away
+          {% endif %}
+        entity_picture_template: >-
+          {% if is_state('device_tracker.olga_bayesian', 'home') %}
+            /local/home/olga.jpg
+          {% endif %}
+        icon_template: >-
+          {% if is_state('device_tracker.olga_bayesian', 'home') %}
+            mdi:home
+          {% else %}
+            mdi:walk
+          {% endif %}
+
+
+#################################################################
+#                                                               #
+#                       Binary Sensors                          #
+#                                                               #
+################################################################# 
+
+binary_sensor:
+
+####################################################
+#                                                  #
+#            Binary Sensors - Template             #
+#                                                  #
+####################################################
+
+  - platform: template
+    sensors:
+      saulos_pixel2xl_ble_status:
+        friendly_name: Saulos Phone
+        device_class: connectivity
+        entity_id: device_tracker.saulos_pixel2xl_ble
+        value_template: "{{ is_state('device_tracker.saulos_pixel2xl_ble', 'home') }}"
+        icon_template: >-
+          {% if is_state('device_tracker.saulos_pixel2xl_ble', 'home') %}
+            mdi:cellphone-android
+          {% elif is_state('device_tracker.saulos_pixel2xl_ble', 'not_home') %}
+            mdi:cellphone-android
+          {% else %}
+            mdi:alert
+          {% endif %}
+        
+      saulos_amazfit2_ble_status:
+        friendly_name: Saulos Amazfit2
+        device_class: connectivity
+        entity_id: device_tracker.saulos_amazfit2_ble
+        value_template: "{{ is_state('device_tracker.saulos_amazfit2_ble', 'home') }}"
+        icon_template: >-
+          {% if is_state('device_tracker.saulos_amazfit2_ble', 'home') %}
+            mdi:watch
+          {% elif is_state('device_tracker.saulos_amazfit2_ble', 'not_home') %}
+            mdi:watch
+          {% else %}
+            mdi:alert
+          {% endif %}
+
+      saulos_mac_ble_status:
+        friendly_name: Saulos Mac
+        device_class: connectivity
+        entity_id: device_tracker.saulos_mac_ble
+        value_template: "{{ is_state('device_tracker.saulos_mac_ble', 'home') }}"
+        icon_template: >-
+          {% if is_state('device_tracker.saulos_mac_ble', 'home') %}
+            mdi:laptop
+          {% elif is_state('device_tracker.saulos_mac_ble', 'not_home') %}
+            mdi:laptop
+          {% else %}
+            mdi:alert
+          {% endif %}
+
+      saulos_headset_ble_status:
+        friendly_name: Saulos Headset
+        device_class: connectivity
+        entity_id: device_tracker.saulos_headset_ble
+        value_template: "{{ is_state('device_tracker.saulos_headset_ble', 'home') }}"
+        icon_template: >-
+          {% if is_state('device_tracker.saulos_headset_ble', 'home') %}
+            mdi:headphones
+          {% elif is_state('device_tracker.saulos_headset_ble', 'not_home') %}
+            mdi:headphones
+          {% else %}
+            mdi:alert
+          {% endif %}
+
+      olgas_pixel2xl_ble_status:
+        friendly_name: Olgas Phone
+        device_class: connectivity
+        entity_id: device_tracker.olgas_pixel2xl_ble
+        value_template: "{{ is_state('device_tracker.olgas_pixel2xl_ble', 'home') }}"
+        icon_template: >-
+          {% if is_state('device_tracker.olgas_pixel2xl_ble', 'home') %}
+            mdi:cellphone-android
+          {% elif is_state('device_tracker.olgas_pixel2xl_ble', 'not_home') %}
+            mdi:cellphone-android
+          {% else %}
+            mdi:alert
+          {% endif %}
+
+#################################################################
+#                                                               #
+#                         Automations                           #
+#                                                               #
+#################################################################
+
+automation:
+
+  alias: Update MQTT sensors on startup
+  trigger:
+    - platform: homeassistant
+      event: start
+  action:
+    - service: mqtt.publish
+      data:
+        topic: "presence/scan/restart"
