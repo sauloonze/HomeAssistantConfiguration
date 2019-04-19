@@ -1,6 +1,5 @@
 # Smart Tiny Home
 
-
 ![](https://github.com/sauloonze/HomeAssistantConfiguration/blob/master/images/home.png)
 
 ## Home Assistant Configuration
@@ -33,7 +32,7 @@ I am using two raspberry pi 3b+. The first one a.k.a.(home) runs the heavy load 
   - 2x Buttons
   - 2x Gateway
   
-### Packages Used
+## Packages Used
 
 - Alarm System:
   - [alarm_control_panel.mqtt](https://www.home-assistant.io/components/alarm_control_panel.mqtt/)
@@ -87,7 +86,7 @@ I am using two raspberry pi 3b+. The first one a.k.a.(home) runs the heavy load 
   - 1x Motion Sensor
   - 1x Button
 
-### Components Used
+## Components Used
 
 - Lovelace UI
   - tracker-card.js
@@ -101,13 +100,13 @@ I am using two raspberry pi 3b+. The first one a.k.a.(home) runs the heavy load 
   - homeassistant-websocket
   - mqtt
 
-### Automations
+## Automations
 
 - Living room lights controlled based on monitor and time of the day
 - Disk, Memory and Temp. alert
 - WIP
 
-### Screenshots
+## Screenshots
 
 - Home
   
@@ -121,9 +120,12 @@ I am using two raspberry pi 3b+. The first one a.k.a.(home) runs the heavy load 
   
 ![](https://github.com/sauloonze/HomeAssistantConfiguration/blob/master/images/climate.png)
 
-# TODO
+## TODO
 
 - Export lovelace
 - Export node-red flows
 - Describe automations
 - More screenshots
+
+Big Credit to:
+https://github.com/JamesMcCarthy79/Home-Assistant-Config
