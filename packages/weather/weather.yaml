@@ -42,6 +42,7 @@ sensor:
       - 2
       - 3
       - 4
+      - 5
     monitored_conditions:
       - icon
       - summary
@@ -66,7 +67,7 @@ sensor:
       - pressure
       - visibility
     scan_interval:
-      minutes: 30
+      minutes: 10
 
 
 ####################################################
@@ -77,9 +78,9 @@ sensor:
 
   - platform: mold_indicator
     name: Living Room Mold Indicator
-    indoor_temp_sensor: sensor.temperature_158d000170e48e
-    indoor_humidity_sensor: sensor.humidity_158d000170e48e
-    outdoor_temp_sensor: sensor.temperature_158d000170e3ef
+    indoor_temp_sensor: sensor.0x00158d000170e48e_temperature
+    indoor_humidity_sensor: sensor.0x00158d000170e48e_humidity
+    outdoor_temp_sensor: sensor.0x00158d000170e3ef_temperature
     calibration_factor: 2.0
 
 ####################################################
@@ -127,7 +128,7 @@ sensor:
       spray_condition:
         friendly_name: 'Spray Suitability'
         value_template: >-
-         {% set suit = states.sensor.delta_t.state %}
+         {% set suit = states.sensor.bom_bickleywa_delta_t.state %}
          {% if suit | float<=2 %}Unsuitable
          {% elif suit | float>2 %}Suitable
          {% elif suit | float>8 %}Marginal
@@ -142,6 +143,29 @@ sensor:
             mdi:sign-caution
          {% endif %}
 
+
+#################################################################
+#                                                               #
+#                        Utility Meter                          #
+#                                                               #
+################################################################# 
+
+utility_meter:
+  rain_24h:
+    source: sensor.bom_bickleywa_rain_today
+    cycle: daily
+    
+  rain_7d:
+    source: sensor.bom_bickleywa_rain_today
+    cycle: weekly
+    
+  rain_m:
+    source: sensor.bom_bickleywa_rain_today
+    cycle: monthly
+    
+  rain_y:
+    source: sensor.bom_bickleywa_rain_today
+    cycle: yearly
 
 #################################################################
 #                                                               #
@@ -170,3 +194,5 @@ weather:
   - platform: darksky
     api_key: !secret darksky_api_key
     mode: daily
+    scan_interval:
+      minutes: 15

@@ -11,7 +11,7 @@
 #################################################################
 
 tts:
-  - platform: google
+  - platform: google_translate
 
 #################################################################
 #                                                               #
@@ -28,7 +28,7 @@ media_extractor:
 #                                                               #
 #################################################################
 
-media_player:
+# media_player:
 
 ####################################################
 #                                                  #
@@ -36,10 +36,10 @@ media_player:
 #                                                  #
 ####################################################
 
-  - platform: samsungtv
-    host: !secret host_samsung_tv
-    mac: !secret mac_samsung_tv
-    timeout: 30
-    port: 8002
-    name: Samsung TV
+  # - platform: samsungtv
+  #   host: !secret host_samsung_tv
+  #   mac: !secret mac_samsung_tv
+  #   timeout: 30
+  #   port: 8002
+  #   name: Samsung TV
     

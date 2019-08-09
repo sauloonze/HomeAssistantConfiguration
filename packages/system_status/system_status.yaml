@@ -22,7 +22,7 @@ device_tracker:
     interval_seconds: 30
     hosts:
       core_router: !secret host_core_router
-      nano_wifi: !secret host_nano_wifi
+      wifi: !secret host_wifi
       screen: !secret host_screen
       xiaomi_gateway: !secret host_xiaomi_gw_1
       xiaomi_gateway_2: !secret host_xiaomi_gw_2
@@ -48,7 +48,7 @@ sensor:
     name: CPU Temperature
     command: "cat /sys/class/thermal/thermal_zone0/temp"
     unit_of_measurement: "°C"
-    value_template: '{{ (value | multiply(0.001)) | round(1) }}'
+    value_template: "{{ (value | multiply(0.001)) | round(1) }}"
 
 ####################################################
 #                                                  #

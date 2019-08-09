@@ -105,7 +105,6 @@ binary_sensor:
     sensors:
       saulos_pixel2xl_ble_status:
         friendly_name: Saulos Phone
-        device_class: connectivity
         entity_id: device_tracker.saulos_pixel2xl_ble
         value_template: "{{ is_state('device_tracker.saulos_pixel2xl_ble', 'home') }}"
         icon_template: >-
@@ -119,7 +118,6 @@ binary_sensor:
         
       saulos_amazfit2_ble_status:
         friendly_name: Saulos Amazfit2
-        device_class: connectivity
         entity_id: device_tracker.saulos_amazfit2_ble
         value_template: "{{ is_state('device_tracker.saulos_amazfit2_ble', 'home') }}"
         icon_template: >-
@@ -133,7 +131,6 @@ binary_sensor:
 
       saulos_mac_ble_status:
         friendly_name: Saulos Mac
-        device_class: connectivity
         entity_id: device_tracker.saulos_mac_ble
         value_template: "{{ is_state('device_tracker.saulos_mac_ble', 'home') }}"
         icon_template: >-
@@ -147,7 +144,6 @@ binary_sensor:
 
       saulos_headset_ble_status:
         friendly_name: Saulos Headset
-        device_class: connectivity
         entity_id: device_tracker.saulos_headset_ble
         value_template: "{{ is_state('device_tracker.saulos_headset_ble', 'home') }}"
         icon_template: >-
@@ -161,7 +157,6 @@ binary_sensor:
 
       olgas_pixel2xl_ble_status:
         friendly_name: Olgas Phone
-        device_class: connectivity
         entity_id: device_tracker.olgas_pixel2xl_ble
         value_template: "{{ is_state('device_tracker.olgas_pixel2xl_ble', 'home') }}"
         icon_template: >-

@@ -22,8 +22,9 @@ switch:
           {{ states("input_boolean.tv_power_status") }}
           {% endif %}
         turn_on:
-          - service: switch.broadlink_send_packet_10_1_1_2
+          - service: broadlink.send
             data:
+              host: 192.168.2.106
               packet: 
                 - "JgBGAJKUEjgSOBI4EhMSExITEhMSExI4EjgSOBITEhMSExITEhMSExI4EjgSExITEjgSOBI4EjgSExITEjgSOBITEhMSExIADQUAAA=="
           - service: input_boolean.turn_on
@@ -32,8 +33,9 @@ switch:
           - service: timer.start
             entity_id: timer.tv_delay
         turn_off:
-          - service: switch.broadlink_send_packet_10_1_1_2
+          - service: broadlink.send
             data:
+              host: 192.168.2.106
               packet: 
                 - "JgBGAJKUEjgSOBI4EhMSExITEhMSExI4EjgSOBITEhMSExITEhMSExI4EjgSExITEjgSOBI4EjgSExITEjgSOBITEhMSExIADQUAAA=="
           - service: input_boolean.turn_off

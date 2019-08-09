@@ -187,7 +187,7 @@ views:
           type: picture-entity
           tap_action:
             action: toggle
-          image: /local/lovelace/tv-switch_1.jpg
+          image: /local/lovelace/tv-switch.jpg
         type: 'custom:card-modder'
       - entity: media_player.living_room
         type: media-control

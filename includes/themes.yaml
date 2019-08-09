@@ -11,9 +11,15 @@ darkred:
   primary-background-color: "#303030"
   primary-color: "#d32f2f"
   primary-text-color: "#cfcfcf"
+  secondary-text-color: "#cfcfcf"
   secondary-background-color: "#131313"
-  sidebar-text_-_background: "#62717b" 
+  sidebar-text_-_background: "#62717b"
+
 # Colors based on variables, see above
+  ha-card-border-radius: '20px'
+  ha-card-background: 'rgba(255, 255, 255, 0.12)'
+  ha-card-border: 1px solid rgba(100, 100, 100, 0.3);
+
   paper-card-header-color: "var(--paper-item-icon-color)" 
   paper-item-icon-active-color: "var(--primary-color)"
   paper-item-icon_-_color: "var(--primary-text-color)"
@@ -28,6 +34,5 @@ darkred:
   paper-toggle-button-checked-button-color: "var(--primary-color)"
   paper-toggle-button-checked-bar-color: "var(--light-primary-color)"
   paper-toggle-button-unchecked-bar-color: "var(--primary-text-color)"
-  secondary-text-color: "var(--primary-color)"
   table-row-background-color: "var(--paper-card-background-color)"
   table-row-alternative-background-color: "var(--sidebar-text_-_background)"

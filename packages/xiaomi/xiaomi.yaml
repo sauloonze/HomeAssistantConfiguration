@@ -17,6 +17,16 @@ homeassistant:
     input_select.aqara_stop_ringtone:
       icon: mdi:stop
 
+sensor:
+  - platform: template
+    sensors:
+      power_5v_sensor:
+        value_template: "{{ states.switch.plug_158d00015dacff.attributes.load_power }}"
+        unit_of_measurement:  W
+      power_12v_sensor:
+        value_template: "{{ states.switch.plug_158d00015e7e53.attributes.load_power }}"
+        unit_of_measurement:  W
+
 #################################################################
 #                                                               #
 #                       Input Selects                           #
