@@ -1,6 +1,5 @@
 # Smart Tiny Home
 
-
 ![](https://github.com/sauloonze/HomeAssistantConfiguration/blob/master/images/home.png)
 
 ## Home Assistant Configuration
@@ -33,12 +32,12 @@ I am using two raspberry pi 3b+. The first one a.k.a.(home) runs the heavy load 
   - 2x Buttons
   - 2x Gateway
   
-### Packages Used
+## Packages Used
 
 - Alarm System:
-  - [alarm](https://home-assistant.io/components/device_tracker.gpslogger/)
+  - [alarm_control_panel.mqtt](https://www.home-assistant.io/components/alarm_control_panel.mqtt/)
 - Camera:
-  - [Xiaomi Cameras](https://home-assistant.io/components/device_tracker.gpslogger/)
+  - [Xiaomi Cameras](https://github.com/samtap/fang-hacks/)
 - Date Time:
   - [sun]
   - [workday]
@@ -47,7 +46,7 @@ I am using two raspberry pi 3b+. The first one a.k.a.(home) runs the heavy load 
   - [moon]
   - [season]
 - Lighting:
-  - [mqtt](https://home-assistant.io/components/light.hue/) Desktop 5m LED Strip - DIY ESP
+  - [mqtt] Desktop 5m LED Strip - DIY ESP
   - [broadlink]
   - [xiaomi-gateway]
 - Media:
@@ -57,12 +56,12 @@ I am using two raspberry pi 3b+. The first one a.k.a.(home) runs the heavy load 
   - [samsungtv]
   - 2x [Google Home Mini]
 - Notifications:
-  - [pushbullet](https://home-assistant.io/components/notify.html5/) Push Notifications
+  - [pushbullet] Push Notifications
 - [PiHole](https://home-assistant.io/components/sensor.pi_hole/)
 - Presence/Device Tracking:
   - [device_tracker]
-  - [monitor](https://home-assistant.io/components/device_tracker.gpslogger/) Uses PI bluetooth to detect device.
-  - [ping](https://home-assistant.io/components/device_tracker.gpslogger/)
+  - [monitor](https://github.com/andrewjfreyer/monitor)
+  - [ping]
 - Radio: Piece of code found on the internet.
 - System Status:
   - [uptime]
@@ -74,20 +73,20 @@ I am using two raspberry pi 3b+. The first one a.k.a.(home) runs the heavy load 
 - TV Power:
   - [broadlink] Power On and Off using broadlink IR
 - Weather:
-  - [darksky](https://home-assistant.io/components/sensor.wunderground/)
+  - [darksky]
   - [airvisual]
   - [mold_indicator]
   - [bom]
-- [Xiaomi](https://home-assistant.io/components/emulated_hue/)
+- [Xiaomi]
   - 2x Temp/Humid Sensor
   - 1x Motion Sensor
   - 1x Button
   - 2x Old Gateway
-- [Zigbee2mqtt](https://home-assistant.io/docs/z-wave/):
+- [Zigbee2mqtt](https://github.com/Koenkk/zigbee2mqtt):
   - 1x Motion Sensor
   - 1x Button
 
-### Components Used
+## Components Used
 
 - Lovelace UI
   - tracker-card.js
@@ -101,13 +100,13 @@ I am using two raspberry pi 3b+. The first one a.k.a.(home) runs the heavy load 
   - homeassistant-websocket
   - mqtt
 
-### Automations
+## Automations
 
 - Living room lights controlled based on monitor and time of the day
 - Disk, Memory and Temp. alert
 - WIP
 
-### Screenshots
+## Screenshots
 
 - Home
   
@@ -121,9 +120,12 @@ I am using two raspberry pi 3b+. The first one a.k.a.(home) runs the heavy load 
   
 ![](https://github.com/sauloonze/HomeAssistantConfiguration/blob/master/images/climate.png)
 
-# TODO
+## TODO
 
 - Export lovelace
 - Export node-red flows
 - Describe automations
 - More screenshots
+
+Big Credit to:
+https://github.com/JamesMcCarthy79/Home-Assistant-Config
