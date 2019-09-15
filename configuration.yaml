@@ -5,12 +5,12 @@
 #################################################################
 
 homeassistant:
-  name: !secret home_name
-  latitude: !secret home_latitude
-  longitude: !secret home_longitude
-  elevation: !secret home_elevation
-  unit_system: metric
-  time_zone: !secret home_timezone
+  # name: !secret home_name
+  # latitude: !secret home_latitude
+  # longitude: !secret home_longitude
+  # elevation: !secret home_elevation
+  # unit_system: metric
+  # time_zone: !secret home_timezone
   packages: !include_dir_named packages
   customize: !include includes/customize.yaml
   
@@ -18,6 +18,7 @@ homeassistant:
     - type: trusted_networks
       trusted_networks:
         - 192.168.2.0/24
+        - 192.168.11.0/24
         - 127.0.0.1
       allow_bypass_login: true
     - type: homeassistant
@@ -44,12 +45,15 @@ config:
 
 http:
 
+# lovelace:
+#   mode: yaml
+
 discovery:
   ignore:
     - sonos
     - netgear_router
-    - samsung_tv
     - igd
+    - samsung_tv
 
 conversation:
 
@@ -85,6 +89,12 @@ switch: !include includes/switches.yaml
 
 logger:
   default: info
+  logs:
+    homeassistant.components.media_player: debug
+#     homeassistant.components.broadlink: debug
+#     homeassistant.components.sensor.xiaomi: debug
+#     homeassistant.components.switch.xiaomi: debug
+#     homeassistant.components.binary_sensor: debug
   #logs:
   #  homeassistant.components.mqtt: debug
   #  homeassistant.components.media_player: debug
@@ -101,9 +111,9 @@ logger:
 
 mqtt:
   broker: !secret mqtt_broker_host
-  port: !secret mqtt_broker_port
-  client_id: home-homeassistant
   keepalive: 60
+  username: mqtt
+  password: mqtt
   discovery: true
   birth_message:
     topic: 'hass/status'
@@ -111,22 +121,6 @@ mqtt:
   will_message:
     topic: 'hass/status'
     payload: 'offline'
-
-#################################################################
-#                                                               #
-#                            Panel                              #
-#                                                               #
-#################################################################
-    
-panel_iframe:
-  configurator:
-    title: Configurator
-    icon: mdi:wrench
-    url:  !secret configurator_url
-  pihole:
-    title: Pi-hole
-    icon: mdi:block-helper
-    url:  !secret pihole_url
 
 ####################################################
 #                                                  #

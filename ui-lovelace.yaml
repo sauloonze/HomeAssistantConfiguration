@@ -1,0 +1,384 @@
+cch:
+  clock_date: true
+  clock_format: '12'
+  main_config: true
+  notifications: clock
+  voice: hide
+resources:
+  - type: module
+    url: /customcards/github/custom-cards/tracker-card.js?track=true
+  - type: module
+    url: /customcards/github/kalkih/mini-media-player-bundle.js?track=true
+  - type: module
+    url: /customcards/github/maykar/compact-custom-header.js?track=true
+  - type: module
+    url: /customcards/github/kalkih/mini-graph-card-bundle.js?track=true
+  - type: js
+    url: /customcards/github/thomasloven/card-tools.js?track=true
+  - type: js
+    url: /customcards/github/thomasloven/card-modder.js?track=true
+title: Saulo & Olga TinyHouse
+views:
+  - background: var(--background-image)
+    badges: []
+    cards:
+      - cards:
+          - card:
+              elements:
+                - entity: sensor.saulo
+                  prefix: 'Saulo -- '
+                  style:
+                    color: white
+                    left: 30%
+                    top: 90%
+                  type: state-label
+                - entity: binary_sensor.saulos_headset_ble_status
+                  style:
+                    color: white
+                    left: 47%
+                    top: 10%
+                  type: state-icon
+                - entity: binary_sensor.saulos_mac_ble_status
+                  style:
+                    color: white
+                    left: 63%
+                    top: 10%
+                  type: state-icon
+                - entity: binary_sensor.saulos_amazfit2_ble_status
+                  style:
+                    color: white
+                    left: 77%
+                    top: 10%
+                  type: state-icon
+                - entity: binary_sensor.saulos_pixel2xl_ble_status
+                  style:
+                    color: white
+                    left: 90%
+                    top: 10%
+                  type: state-icon
+              image: /local/lovelace/home/saulo.png
+              type: picture-elements
+            style:
+              border: 'solid 1px rgba(100,100,100,0.3)'
+              border-radius: 20px
+              overflow: hidden
+            type: 'custom:card-modder'
+          - card:
+              elements:
+                - entity: sensor.olga
+                  prefix: 'Olga -- '
+                  style:
+                    color: white
+                    left: 27%
+                    top: 89%
+                  type: state-label
+                - entity: binary_sensor.olgas_pixel2xl_ble_status
+                  style:
+                    color: white
+                    left: 90%
+                    top: 10%
+                  type: state-icon
+              image: /local/lovelace/home/olga.png
+              type: picture-elements
+            style:
+              border: 'solid 1px rgba(100,100,100,0.3)'
+              border-radius: 20px
+              overflow: hidden
+            type: 'custom:card-modder'
+        type: horizontal-stack
+      - card:
+          elements:
+            - entity: binary_sensor.house_alarm_sensor
+              style:
+                color: white
+                left: 8%
+                top: 88%
+              type: state-icon
+            - entity: binary_sensor.doors
+              style:
+                color: white
+                left: 16%
+                top: 88%
+              type: state-icon
+            - entity: binary_sensor.trash
+              style:
+                color: white
+                left: 32%
+                top: 88%
+              type: state-icon
+            - entity: binary_sensor.recycle
+              style:
+                color: white
+                left: 41%
+                top: 88%
+              type: state-icon
+            - entity: sensor.0x00158d000170e3ef_temperature
+              style:
+                color: white
+                left: 87%
+                top: 82%
+              tap_action: more-info
+              type: state-icon
+            - entity: sensor.0x00158d000170e3ef_temperature
+              style:
+                color: white
+                left: 87%
+                top: 95%
+              type: state-label
+            - entity: sensor.0x00158d000170e48e_temperature
+              style:
+                color: white
+                left: 9%
+                top: 12%
+              type: state-label
+          image: /local/lovelace/home/home.png
+          type: picture-elements
+        style:
+          border: 'solid 1px rgba(100,100,100,0.3)'
+          border-radius: 20px
+          overflow: hidden
+        type: 'custom:card-modder'
+      - entities:
+          - artwork: cover
+            artwork_border: true
+            entity: media_player.samsung_tv_remote
+            group: true
+            hide:
+              controls: true
+            icon: 'mdi:speaker'
+            name: samsung
+            show_source: true
+            type: 'custom:mini-media-player'
+        type: entities
+      - entity: weather.dark_sky
+        type: weather-forecast
+    icon: 'mdi:home'
+    path: default_view
+    title: Home
+  - background: var(--background-image)
+    badges: []
+    cards:
+      - entities:
+          - input_select.radio_station
+          - input_select.media_player
+          - input_number.radio_volume
+          - script.play_radio
+          - script.stop_radio
+        id: bcd37a30efe04c2a95126a36081e5241
+        show_header_toggle: false
+        title: Radio
+        type: entities
+      - card:
+          entity: switch.power_main_tv
+          image: /local/lovelace/tv-switch.jpg
+          name: Main TV
+          tap_action:
+            action: toggle
+          type: picture-entity
+        type: 'custom:card-modder'
+      - entity: media_player.samsung_tv_remote
+        type: media-control
+    icon: 'mdi:television'
+  - background: var(--background-image)
+    badges: []
+    cards:
+      - entities:
+          - sensor.0x00158d000170e48e_temperature
+          - sensor.0x00158d000170e3ef_temperature
+        type: 'custom:mini-graph-card'
+      - entities:
+          - sensor.0x00158d000170e48e_humidity
+          - sensor.0x00158d000170e3ef_humidity
+          - sensor.living_room_mold_indicator
+        show_header_toggle: false
+        title: Outside
+        type: 'custom:mini-graph-card'
+      - entity: sensor.dark_sky_daily_summary
+        type: sensor
+      - entities:
+          - entity: sensor.bom_temp
+          - entity: sensor.bom_humd
+          - entity: sensor.bom_wind_sp
+          - entity: sensor.bom_wind_bear
+        show_header_toggle: false
+        title: BOM
+        type: entities
+      - aspect_ratio: 150%
+        type: iframe
+        url: 'https://embed.windy.com/embed2.html?rain,-32.098,116.107,9'
+    icon: 'mdi:thermometer'
+    path: climate
+    title: Climate
+  - background: var(--background-image)
+    badges: []
+    cards:
+      - entity: light.gateway_light_286c07f0b826
+        name: Living Room
+        type: light
+      - entity: light.gateway_light_34ce00813bd1
+        name: Bathroom
+        type: light
+      - entities:
+          - entity: sensor.illumination_286c07f0b826
+          - entity: sensor.illumination_34ce00813bd1
+        type: entities
+      - entities:
+          - entity: switch.candles
+        show_header_toggle: false
+        title: Switch
+        type: entities
+      - entity: light.led_1_2
+        name: Under shoes
+        theme: Backend-selected
+        type: light
+      - entity: light.led_1_3
+        type: light
+    icon: 'mdi:lightbulb'
+    path: lights
+    theme: sunset
+    title: Lights
+  - background: var(--background-image)
+    badges: []
+    cards:
+      - entity: camera.livingroom6
+        type: picture-entity
+      - entity: camera.frontgarden134
+        type: picture-entity
+      - entity: camera.backgarden92
+        type: picture-entity
+    icon: 'mdi:cctv'
+    title: Surveillance
+  - background: var(--background-image)
+    badges: []
+    cards:
+      - card:
+          elements:
+            - entity: alarm_control_panel.ha_alarm
+              style:
+                color: white
+                left: 15%
+                top: 88%
+              type: state-icon
+            - entity: alarm_control_panel.ha_alarm
+              prefix: 'Alarm: '
+              style:
+                color: white
+                left: 32%
+                top: 88%
+              type: state-label
+          image: /local/lovelace/security/alarm.jpg
+          type: picture-elements
+        style:
+          border: 'solid 1px rgba(100,100,100,0.3)'
+          border-radius: 20px
+          overflow: hidden
+        type: 'custom:card-modder'
+      - cards:
+          - card:
+              elements:
+                - entity: binary_sensor.door_window_sensor_158d00019dab6f
+                  style:
+                    color: white
+                    left: 15%
+                    top: 82%
+                  type: state-icon
+                - entity: binary_sensor.door_window_sensor_158d00019dab6f
+                  prefix: 'Front: '
+                  style:
+                    color: white
+                    left: 15%
+                    top: 92%
+                  type: state-label
+              image: /local/lovelace/security/door.png
+              type: picture-elements
+            style:
+              border: 'solid 1px rgba(100,100,100,0.3)'
+              border-radius: 20px
+              overflow: hidden
+            type: 'custom:card-modder'
+        type: vertical-stack
+      - cards:
+          - card:
+              elements:
+                - entity: binary_sensor.0x00158d0001a2b1f2_occupancy
+                  style:
+                    color: white
+                    left: 25%
+                    top: 82%
+                  type: state-icon
+                - entity: binary_sensor.0x00158d0001a2b1f2_occupancy
+                  prefix: 'Living: '
+                  style:
+                    color: white
+                    left: 25%
+                    top: 92%
+                  type: state-label
+              image: /local/lovelace/security/motion.jpg
+              type: picture-elements
+            style:
+              border: 'solid 1px rgba(100,100,100,0.3)'
+              border-radius: 20px
+              overflow: hidden
+            type: 'custom:card-modder'
+        type: vertical-stack
+      - entity: alarm_control_panel.ha_alarm
+        states:
+          - arm_home
+          - arm_away
+          - arm_night
+        type: alarm-panel
+    icon: 'mdi:shield-home'
+    panel: false
+    title: Security
+    type: vertical-stack
+  - background: var(--background-image)
+    badges: []
+    cards:
+      - detail: 2
+        entity: sensor.cpu_temperature
+        graph: line
+        name: CPU Temp last 24h
+        theme: Backend-selected
+        type: sensor
+      - entities:
+          - sensor.processor_use
+          - sensor.memory_use_percent
+        type: 'custom:mini-graph-card'
+      - entities:
+          - entity: sensor.time
+          - entity: sensor.date
+          - entity: sensor.season
+          - entity: sensor.moon
+          - entity: sensor.maceio_time
+          - entity: sensor.german_time
+        theme: Backend-selected
+        type: entities
+      - type: 'custom:tracker-card'
+      - entities:
+          - entity: input_boolean.zigbee_permit_join
+          - entity: timer.zigbee_permit_join
+          - entity: sensor.bridge_state
+        show_header_toggle: false
+        title: ZigBee
+        type: entities
+      - entities:
+          - entity: sensor.pihole_version
+          - entity: sensor.pi_hole_ads_blocked_today
+          - entity: sensor.pi_hole_ads_percentage_blocked_today
+          - entity: sensor.pi_hole_dns_queries_today
+        show_header_toggle: false
+        title: Pi hole
+        type: entities
+      - entities:
+          - entity: device_tracker.broadlink
+          - entity: device_tracker.samsung_tv
+          - entity: device_tracker.saulo_ping
+          - entity: device_tracker.wifi
+          - entity: device_tracker.xiaomi_gateway
+          - entity: device_tracker.xiaomi_gateway_2
+        show_header_toggle: false
+        title: Systems
+        type: entities
+    icon: 'mdi:cogs'
+    title: System
+

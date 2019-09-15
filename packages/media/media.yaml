@@ -30,16 +30,15 @@ media_extractor:
 
 # media_player:
 
-####################################################
-#                                                  #
-#             Media Player - Samsung TV            #
-#                                                  #
-####################################################
+# ####################################################
+# #                                                  #
+# #             Media Player - Samsung TV            #
+# #                                                  #
+# ####################################################
 
-  # - platform: samsungtv
-  #   host: !secret host_samsung_tv
-  #   mac: !secret mac_samsung_tv
-  #   timeout: 30
-  #   port: 8002
-  #   name: Samsung TV
+#   - platform: samsungtv
+#     host: !secret host_samsung_tv
+#     mac: !secret host_samsung_tv_mac
+#    port: 8001
+#    timeout: 30
     

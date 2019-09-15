@@ -24,7 +24,7 @@ switch:
         turn_on:
           - service: broadlink.send
             data:
-              host: 192.168.2.106
+              host: !secret host_broadlink
               packet: 
                 - "JgBGAJKUEjgSOBI4EhMSExITEhMSExI4EjgSOBITEhMSExITEhMSExI4EjgSExITEjgSOBI4EjgSExITEjgSOBITEhMSExIADQUAAA=="
           - service: input_boolean.turn_on
@@ -35,7 +35,7 @@ switch:
         turn_off:
           - service: broadlink.send
             data:
-              host: 192.168.2.106
+              host: !secret host_broadlink
               packet: 
                 - "JgBGAJKUEjgSOBI4EhMSExITEhMSExI4EjgSOBITEhMSExITEhMSExI4EjgSExITEjgSOBI4EjgSExITEjgSOBITEhMSExIADQUAAA=="
           - service: input_boolean.turn_off
